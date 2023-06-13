@@ -44,12 +44,12 @@ function postnew() {
    
     $.ajax({
     	// run locally
-        url : "http://localhost:7071/api/kurtrestaurantwriter",
+        //url : "http://localhost:7071/api/kurtrestaurantwriter",
         
         
         
         // run on azure
-        //url : "https://kurtrestaurantwriter.azurewebsites.net/api/kurtrestaurantwriter",
+        url : "https://jacobwritemongo.azurewebsites.net/api/jacobwritemongo",
         
         
 
