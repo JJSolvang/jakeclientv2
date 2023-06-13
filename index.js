@@ -61,11 +61,11 @@ function postnew() {
         //dataType   : "json",
         success: function (result) {
             console.log(result);
-            //document.getElementById("name").value = "";
-            //document.getElementById("city").value = "";
-            //document.getElementById("cuisine").value = ""
-            //document.getElementById("stars").value = "";
-            //document.getElementById("poster").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("city").value = "";
+            document.getElementById("cuisine").value = ""
+            document.getElementById("stars").value = "";
+            document.getElementById("poster").value = "";
             
           }
         });
