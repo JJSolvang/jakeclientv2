@@ -91,7 +91,7 @@ function createList(which, city) {
     //$.get("http://localhost:7071/api/readfrommongo", function(data, status){ 
     
 	// run on Azure
-    $.get("https://jacobcosmosdatawriter.azurewebsites.net/api/jacobmongowriter", function(data, status){ 
+    $.get("https://jacobwritemongo.azurewebsites.net/api/jacobmongowriter", function(data, status){ 
         
     
     dataArray = JSON.parse(data);
