@@ -10,8 +10,6 @@ let ReviewObject = function (pName, pCity, pCuisine, pStars, pPoster) {
     this.poster = pPoster;
 }
 
-// cant use reuire here *************************************
-//const { WebPubSubServiceClient } = require('@azure/web-pubsub');
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -27,6 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("postreview").addEventListener("click", function () {
         postnew();  
     });
+    
+    function StartWebListener()   
+    {
+        $.get("https://jacoblistenandwrite.azurewebsites.net/", function(data, status){  });
+    }
     
 });
 
@@ -44,21 +47,23 @@ function postnew() {
    
     $.ajax({
     	// run locally
-        //url : "http://localhost:7071/api/kurtrestaurantwriter",
+        //url : "http://localhost:7071/api/jacobwritemongo",
         
+        // local pubsub
+        //url: "http://localhost:7071/api/jacobwritetops",
         
+        // run on azure pre pubsub
+        //url : "https://kurtwritemongo.azurewebsites.net/api/kurtmongowriter",
         
-        // run on azure
-        url : "https://jacobwritemongo.azurewebsites.net/api/jacobwritemongo",
+         // run on azure with  pubsub
         
-        
+        url : "https://jacobwritetopubsub.azurewebsites.net/api/jacobwritemongo",
 
-       
+        
         
         type: "POST",
         data: JSON.stringify(newOne),
         contentType: "application/json; charset=utf-8",  
-        //dataType   : "json",
         success: function (result) {
             console.log(result);
             document.getElementById("name").value = "";
@@ -72,28 +77,17 @@ function postnew() {
 }
   
 function createList(which, city) {
-       
-    // if(which == "all"){
-	// // run locally
-    // let  URL = "http://localhost:7071/api/readfrommongosubset/?name=*";
-    // }
-    
-    // if(which == "city"){
-    // // subset
-    // // run locally
-    // let  URL = "http://localhost:7071/api/readfrommongosubset/?name="+city;
-    // }
+    let param = "all";
+    if(which == "city"){
+        param = city;
+    }
 
-    // $.get(URL, function(data, status){ 
-        
-     
-	// run local
-    //$.get("http://localhost:7071/api/readfrommongo", function(data, status){ 
-    
-	// run on Azure
-    $.get("https://jacobwritemongo.azurewebsites.net/api/jacobwritemongo", function(data, status){ 
-        
-    
+    // run in cloud
+    //$.get("https://jacobmongoreader.azurewebsites.net/api/jacobmongoreader/?name="+ param, function(data, status){
+ 
+    // run local
+    $.get("https://jacobmongoreader.azurewebsites.net/api/jacobmongoreader/?name=" + param, function(data, status){ 
+
     dataArray = JSON.parse(data);
     subsetArray = [];
     for(i = 0; i < dataArray.length; i++){
